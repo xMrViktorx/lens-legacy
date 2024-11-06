@@ -3,6 +3,8 @@
 /public/build
 /public/hot
 /public/css
+/public/build-frontend
+/public/fonts
 /public/storage
 /storage/*.key
 /vendor
