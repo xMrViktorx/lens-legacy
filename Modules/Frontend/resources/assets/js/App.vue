@@ -5,19 +5,19 @@
 </template>
 
 <script>
-import Navbar from "./Navbar.vue";
-import Home from "./Home.vue";
-import Footer from "./Footer.vue";
+  import Navbar from "./Navbar.vue";
+  import Home from "./Home.vue";
+  import Footer from "./Footer.vue";
 
-export default {
-  data() {
-    return {
-    };
-  },
-  components: {
-    Navbar,
-    Home,
-    Footer
-  },
-};
+  export default {
+    data() {
+      return {
+      };
+    },
+    components: {
+      Navbar,
+      Home,
+      Footer
+    },
+  };
 </script>
