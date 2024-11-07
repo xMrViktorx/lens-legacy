@@ -8,6 +8,7 @@
   import Navbar from "./Navbar.vue";
   import Home from "./Home.vue";
   import Footer from "./Footer.vue";
+  import Swal from "sweetalert2";
 
   export default {
     data() {
