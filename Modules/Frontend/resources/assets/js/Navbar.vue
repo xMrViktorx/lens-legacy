@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex flex-wrap items-center lg:justify-around justify-between w-full p-4 text-lg bg-white">
+    <nav class="flex flex-wrap items-center fixed lg:justify-around justify-between w-full p-4 text-lg bg-white">
       <div>
         <a href="#">
             <img src="../images/logo.png" alt="img" class="w-24" />
@@ -26,13 +26,22 @@
           <li>
             <a class="md:p-4 py-2 block text-2xl hover:text-purple-400" href="#"><i class="ri-facebook-line"></i></a>
           </li>
-          <li><a class="md:p-4 py-2 block text-2xl hover:text-purple-400" href="#"><i class="ri-instagram-line"></i></a></li>
+          <li><a class="md:p-4 py-2 block text-2xl hover:text-purple-400" href="#"><i class="ri-instagram-line"></i></a>
+          </li>
+
+          <!-- Language Switcher Button -->
+          <li class="flex justify-center items-center">
+            <button @click="showLanguageSwitcher" class="flex justify-center items-center px-2"><i class="ri-earth-line text-2xl"></i></button>
+          </li>
         </ul>
       </div>
     </nav>
   </template>
   
   <script>
+
+  import Swal from "sweetalert2";
+
   export default {
     data() {
       return {
@@ -42,6 +51,38 @@
     methods: {
       toggleNav() {
         this.showMobileNav = !this.showMobileNav;
+      },
+      switchLanguage(locale) {
+        this.$i18n.locale = locale; // Switch locale dynamically
+      },
+
+      showLanguageSwitcher() {
+        // Show SweetAlert with language options
+        Swal.fire({
+          showConfirmButton: false,
+          showCloseButton: true,
+          html: `
+            <div class="flex flex-col pb-5">
+              <span class="language-title-swall md:text-4xl text-3xl">${this.$t("showAlertButton")}</span><br>
+              <span class="py-3 text-2xl font-semibold text-black cursor-pointer" id="btn-en">${this.$t("language.english")}</span>
+              <span class="py-3 text-2xl font-semibold text-black cursor-pointer" id="btn-hu">${this.$t("language.hungarian")}</span>
+              <span class="py-3 text-2xl font-semibold text-black cursor-pointer" id="btn-rs">${this.$t("language.serbian")}</span>
+            </div>
+          `,
+          focusConfirm: false,
+          didOpen: () => {
+            // Access the buttons and set click event listeners
+            document.getElementById("btn-en").addEventListener("click", () => this.changeLanguage("en"));
+            document.getElementById("btn-hu").addEventListener("click", () => this.changeLanguage("hu"));
+            document.getElementById("btn-rs").addEventListener("click", () => this.changeLanguage("rs"));
+          }
+        });
+      },
+
+      changeLanguage(locale) {
+        // Change the locale dynamically and close SweetAlert
+        this.$i18n.locale = locale;
+        Swal.close();
       },
     },
   };

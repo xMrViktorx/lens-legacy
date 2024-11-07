@@ -1,24 +1,27 @@
 <template>
+  <div>
+    <!-- Navbar -->
     <Navbar />
+
+    <!-- Home Content -->
     <Home />
+
+    <!-- Footer -->
     <Footer />
+  </div>
 </template>
 
 <script>
   import Navbar from "./Navbar.vue";
   import Home from "./Home.vue";
   import Footer from "./Footer.vue";
-  import Swal from "sweetalert2";
 
   export default {
-    data() {
-      return {
-      };
-    },
+    name: "App",
     components: {
       Navbar,
       Home,
-      Footer
+      Footer,
     },
   };
 </script>

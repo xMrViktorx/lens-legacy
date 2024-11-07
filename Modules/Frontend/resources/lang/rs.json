@@ -1,0 +1,12 @@
+{
+    "greeting": "Cao",
+    "welcome_message": "Dobrodosli!",
+    "ok": "U redu",
+    "language": {
+      "english": "Angol",
+      "hungarian": "Magyar",
+      "serbian": "Szerb"
+    },
+    "showAlertButton": "Pokazi poruku"
+  }
+  

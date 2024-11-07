@@ -1,4 +1,7 @@
 @import "../../../../../public/build-frontend/css/remixicon.css";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @font-face {
     font-family: "Nunito";
@@ -48,6 +51,268 @@
     font-style: normal;
 }
 
+:root {
+    --main-color: #09539a;
+    --light-dark-blue: #cbdaea;
+    --light-blue: #eef2f9;
+    --lightest-blue: #f0f4fa;
+    --secondary-color: #dd2131;
+    --white: #ffffff;
+    --grey: #adb5bd;
+    --black: #000000;
+    --border-gray: #ccc;
+    --off-white: #fafafa;
+}
+
+/* scroll bar design start*/
+
+::-webkit-scrollbar {
+    width: 0.4375rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: var(--lightest-blue);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--main-color);
+    border-radius: 0px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* scroll bar design end*/
+
 #app {
     font-family: Nunito;
 }
+
+/* swall style start*/
+
+.swal2-close:focus {
+    box-shadow: none !important;
+}
+
+.swal2-error {
+    background-color: var(--light-dark-blue) !important;
+    border-color: var(--light-dark-blue) !important;
+}
+
+.swal2-x-mark-line-left,
+.swal2-x-mark-line-right {
+    background-color: var(--secondary-color) !important;
+}
+
+.swal-input {
+    background-color: transparent !important;
+}
+
+.swal2-popup {
+    border-radius: 1rem;
+    background: var(--lightest-blue);
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.1);
+    padding: 0px !important;
+
+    @media (max-width: 620px) {
+        width: 90% !important;
+    }
+}
+
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: none !important;
+}
+
+.swal2-actions {
+    gap: 1.5625rem !important;
+}
+
+.swal2-actions {
+    align-items: baseline !important;
+}
+
+.swal2-close {
+    color: black !important;
+    position: relative;
+    left: -0.9375rem;
+    top: 0.625rem;
+}
+
+.swal2-html-container {
+    padding: 1.875rem !important;
+    margin: 0rem !important;
+    color: var(--black) !important;
+    font-family: "Nunito" !important;
+    font-weight: 500 !important;
+    display: flex !important;
+}
+
+.swal2-container.swal2-center > .swal2-popup {
+    border-radius: 0.625rem;
+}
+
+.swal2-close {
+    color: var(--main-color) !important;
+    margin-top: 0.3125rem;
+    margin-left: 0.3125rem !important;
+}
+
+.swal2-icon.swal2-success [class^="swal2-success-line"] {
+    z-index: 5 !important;
+    background-color: var(--main-color) !important;
+}
+
+.swal2-success-circular-line-left {
+    background-color: transparent !important;
+}
+
+.swal2-success-circular-line-right {
+    background-color: transparent !important;
+}
+
+.swal2-success-fix {
+    background-color: transparent !important;
+}
+
+.swal2-icon.swal2-success {
+    color: var(--main-color) !important;
+    border-color: var(--light-dark-blue) !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: transparent !important;
+    background-color: var(--light-dark-blue) !important;
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: var(--secondary-color) !important;
+    font-size: 1.125rem !important;
+    font-weight: 700 !important;
+}
+
+.swal2-icon.swal2-question [class^="swal2-question-line"] {
+    background-color: var(--main-color) !important;
+}
+
+.swal2-icon.swal2-question {
+    color: var(--main-color) !important;
+    border-color: var(--light-dark-blue) !important;
+    background-color: var(--light-dark-blue) !important;
+}
+
+.swal2-icon.swal2-question .swal2-question-ring {
+    border-color: var(--light-dark-blue) !important;
+}
+
+.swal2-icon.swal2-warning [class^="swal2-question-line"] {
+    background-color: var(--main-color) !important;
+}
+
+.swal2-icon.swal2-warning {
+    color: var(--main-color) !important;
+    border-color: var(--secondary-color) !important;
+    background-color: var(--secondary-color) !important;
+}
+
+.swal2-icon.swal2-warning .swal2-warning-ring {
+    border-color: var(--main-color) !important;
+}
+
+.swall-primary-button {
+    color: var(--white) !important;
+    font-family: "Nunito" !important;
+    font-weight: 500 !important;
+    font-size: 1.125rem !important;
+    background-color: var(--main-color) !important;
+    border-radius: 100px !important;
+    width: 100% !important;
+    @media (max-width: 1240px) {
+        font-size: 1rem !important;
+    }
+}
+
+.swall-primary-button:hover {
+    background-color: var(--light-dark-blue) !important;
+    color: var(--black) !important;
+    background-image: none !important;
+}
+
+.swal2-styled.swal2-confirm {
+    color: var(--white) !important;
+    font-family: "Nunito" !important;
+    font-weight: 500 !important;
+    font-size: 1.125rem !important;
+    background-color: var(--main-color) !important;
+    border-radius: 100px !important;
+    width: 100% !important;
+    @media (max-width: 1240px) {
+        font-size: 1rem !important;
+    }
+}
+
+.swal2-styled.swal2-confirm:hover {
+    background-color: var(--light-dark-blue) !important;
+    color: var(--black) !important;
+    background-image: none !important;
+}
+
+.swal2-icon-success .swal2-actions {
+    flex-direction: column-reverse !important;
+}
+
+.swal2-actions {
+    flex-direction: column !important;
+    padding-left: 1.875rem !important;
+    padding-right: 1.875rem !important;
+    width: 100% !important;
+    gap: 0.9375rem !important;
+    padding-bottom: 1.875rem !important;
+}
+
+.swal2-styled.swal2-cancel {
+    color: var(--black) !important;
+    font-family: "Nunito" !important;
+    font-weight: 500 !important;
+    font-size: 1.125rem !important;
+    background-color: var(--light-dark-blue) !important;
+    border-radius: 100px !important;
+    width: 100% !important;
+    @media (max-width: 1240px) {
+        font-size: 1rem !important;
+    }
+}
+
+.swal2-styled.swal2-cancel:hover {
+    background-color: var(--main-color) !important;
+    color: #fff !important;
+}
+
+.swal2-styled.swal2-default-outline:focus {
+    box-shadow: none !important;
+}
+
+.swal2-styled {
+    margin: 0px !important;
+}
+
+.swal2-title {
+    color: var(--black) !important;
+}
+
+.swal2-container {
+    padding: 0px !important;
+}
+
+.language-title-swall {
+    color: var(--black);
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 2rem;
+    text-align: center;
+}
+
+/* swall style end*/

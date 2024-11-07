@@ -1,0 +1,12 @@
+{
+    "greeting": "Helló",
+    "welcome_message": "Üdvözöljük a weboldalon!",
+    "ok": "Rendben",
+    "language": {
+      "english": "Angol",
+      "hungarian": "Magyar",
+      "serbian": "Szerb"
+    },
+    "showAlertButton": "Mutasd az üzenetet"
+  }
+  
