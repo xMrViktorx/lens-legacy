@@ -5,7 +5,14 @@
     "language": {
       "english": "Angol",
       "hungarian": "Magyar",
-      "serbian": "Szerb"
+      "serbian": "Szerb",
+      "name": "Jezik"
+    },
+    "menu": {
+      "home": "Početna stranica",
+      "event": "Događaji",
+      "portrait": "Portreti",
+      "birthday": "Rođendani"
     },
     "showAlertButton": "Pokazi poruku"
   }

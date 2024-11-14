@@ -5,7 +5,14 @@
     "language": {
       "english": "English",
       "hungarian": "Hungarian",
-      "serbian": "Serbian"
+      "serbian": "Serbian",
+      "name": "Language"
+    },
+    "menu": {
+      "home": "Home page",
+      "event": "Evrnts",
+      "portrait": "Portraits",
+      "birthday": "Birthdays"
     },
     "showAlertButton": "Show Alert"
   }

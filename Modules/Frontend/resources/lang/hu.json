@@ -5,7 +5,14 @@
     "language": {
       "english": "Angol",
       "hungarian": "Magyar",
-      "serbian": "Szerb"
+      "serbian": "Szerb",
+      "name": "Nyelv"
+    },
+    "menu": {
+      "home": "Főoldal",
+      "event": "Események",
+      "portrait": "Portrék",
+      "birthday": "Születésnapok"
     },
     "showAlertButton": "Mutasd az üzenetet"
   }
