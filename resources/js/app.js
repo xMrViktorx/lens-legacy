@@ -27,7 +27,7 @@ app.mount('#app');
 
 //Nav JS for animation start
 
-var menuBtn = document.querySelector('.menu-btn');
+var menuBtn = document.querySelector('.menu-btn-icon');
 var nav = document.querySelector('nav');
 var lineOne = document.querySelector('nav .menu-btn .line--1');
 var lineTwo = document.querySelector('nav .menu-btn .line--2');
@@ -41,6 +41,7 @@ menuBtn.addEventListener('click', () => {
   lineTwo.classList.toggle('line-fade-out');
   lineThree.classList.toggle('line-cross');
   link.classList.toggle('fade-in');
+  document.body.classList.toggle('no-scroll');
 
   if (languageSwitcher.classList.contains('hide-switch')) {
     languageSwitcher.classList.remove('hide-switch');

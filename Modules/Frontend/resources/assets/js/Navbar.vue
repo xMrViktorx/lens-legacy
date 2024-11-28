@@ -2,7 +2,7 @@
   <div>
     <nav>
       <div class="menu-btn">
-        <div class="mt-1">
+        <div class="mt-1 menu-btn-icon">
           <div class="line line--1"></div>
           <div class="line line--2"></div>
           <div class="line line--3"></div>
@@ -14,15 +14,31 @@
       </div>
 
       <div class="nav-links">
-        <div class="flex flex-col w-[520px] justify-center items-center h-full">
-          <a href="" class="link" @mouseover="showDiv = true" @mouseleave="showDiv = false">{{ $t('menu.home') }}</a>
-          <a href="" class="link">{{ $t('menu.event') }}</a>
-          <a href="" class="link">{{ $t('menu.portrait') }}</a>
-          <a href="" class="link">{{ $t('menu.birthday') }}</a>
+        <div class="flex flex-col lg:w-[520px] sm:w-[405px] w-full justify-center bg-white items-center h-full">
+          <a href="#" 
+            class="link" 
+            @mouseover="activeMenu = 'home'" 
+            @mouseleave="activeMenu = null">{{ $t('menu.home') }}</a>
+          <a href="#" 
+            class="link" 
+            @mouseover="activeMenu = 'event'" 
+            @mouseleave="activeMenu = null">{{ $t('menu.event') }}</a>
+          <a href="#" 
+            class="link" 
+            @mouseover="activeMenu = 'portrait'" 
+            @mouseleave="activeMenu = null">{{ $t('menu.portrait') }}</a>
+          <a href="#" 
+            class="link" 
+            @mouseover="activeMenu = 'birthday'" 
+            @mouseleave="activeMenu = null">{{ $t('menu.birthday') }}</a>
           <span class="link cursor-pointer" @click="showLanguageSwitcher">{{ $t('language.name') }}</span>
         </div>
-        <div class="w-full h-full">
-          <div class="w-full h-full menu-image" :class="{ 'hover-div-show': showDiv }" :style="{ backgroundImage: 'url(/build-frontend/images/categories/party.jpg)' }">
+        <div class="w-full h-full relative lg:block hidden">
+          <div 
+            v-for="(image, index) in menuImages" 
+            :key="index" 
+            :class="['menu-image', { 'hover-div-show': activeMenu === image.key }]" 
+            :style="{ zIndex: index + 1, backgroundImage: `url(${image.url})` }">
           </div>
         </div>
       </div>
@@ -40,7 +56,13 @@
         showMobileNav: false,
         isMenuOpen: false,
         currentLocale: this.$i18n.locale,
-        showDiv: false,
+        activeMenu: null,
+        menuImages: [
+          { key: 'home', url: '/build-frontend/images/categories/party.jpg' },
+          { key: 'event', url: '/build-frontend/images/categories/event.jpg' },
+          { key: 'portrait', url: '/build-frontend/images/categories/portrait.jpg' },
+          { key: 'birthday', url: '/build-frontend/images/categories/birthday.jpg' },
+        ],
       };
     },
     methods: {
