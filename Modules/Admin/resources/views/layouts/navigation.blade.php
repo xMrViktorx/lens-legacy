@@ -5,7 +5,7 @@ $currentUrl = \Request::segment(2);
 @extends('admin::layouts.master')
 
 @section('navigation')
-    <nav class="fixed z-30 w-full bg-white border-b-2 shadow-md">
+    <div class="fixed z-30 w-full bg-white border-b-2 shadow-md">
         <div class="px-6 py-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
@@ -35,7 +35,7 @@ $currentUrl = \Request::segment(2);
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
     <div class="pt-12 lg:flex">
         <div class="flex flex-col w-full px-4 py-8 overflow-y-auto border-b lg:border-r border-r-slate-300 lg:min-h-[100vh] lg:h-100 lg:w-64">
             <div class="hidden lg:flex flex-col justify-between mt-6" id="mobile-menu">

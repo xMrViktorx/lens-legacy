@@ -17,9 +17,9 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('build-frontend/css/app.css') }}">
 
     {{-- Vite CSS --}}
-    @vite('public/css/tailwind.css')
 </head>
 
 <body>

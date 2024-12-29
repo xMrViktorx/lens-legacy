@@ -11,7 +11,7 @@ use Illuminate\Contracts\Support\Renderable;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of all users.
      * @return Renderable
      */
     public function index()
@@ -21,7 +21,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new user.
      * @return Renderable
      */
     public function create()
@@ -30,7 +30,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in the database.
      * @param Request $request
      * @return Renderable
      */
@@ -45,48 +45,31 @@ class UserController extends Controller
         $validated['password'] = Hash::make('password');
 
         User::create($validated);
+
         return redirect()->route('admin.user.index')->with('success', 'Felhasználó sikeresen létrehozva!');
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
-     */
-    public function show($id)
-    {
-        return view('admin::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing an existing user.
      * @param int $id
      * @return Renderable
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
-        if ($user) {
-            return view('admin::user.edit', compact('user'));
-        } else {
-            return redirect()->back();
-        }
+        return view('admin::user.edit', compact('user'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update an existing user in the database.
      * @param Request $request
      * @param int $id
      * @return Renderable
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-
-        if (!$user) {
-            return redirect()->back();
-        }
+        $user = User::findOrFail($id);
 
         $rules = [
             'name' => 'required',
@@ -111,19 +94,16 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a user from the database.
      * @param int $id
      * @return Renderable
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-
-        if (!$user) {
-            return redirect()->back();
-        }
+        $user = User::findOrFail($id);
 
         $user->delete();
+        
         return redirect()->back()->with('success', 'Felhasználó sikeresen törölve!');
     }
 }
