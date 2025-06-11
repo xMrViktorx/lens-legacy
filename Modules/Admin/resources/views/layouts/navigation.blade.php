@@ -20,6 +20,25 @@ $currentUrl = \Request::segment(2);
 
                 </div>
                 <div class="flex items-center">
+                    <div class="relative inline-block text-left mr-4">
+                        <button onclick="document.getElementById('langMenu').classList.toggle('hidden')" class="inline-flex items-center px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+                            {{ strtoupper(app()->getLocale()) }}
+                            <svg class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06-.02L10 10.586l3.71-3.396a.75.75 0 111.02 1.1l-4.25 3.894a.75.75 0 01-1.02 0l-4.25-3.894a.75.75 0 01-.02-1.06z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <div id="langMenu" class="absolute z-50 hidden mt-2 bg-white border rounded shadow w-24">
+                            @foreach (['en' => 'English', 'hu' => 'Magyar', 'sr' => 'Srpski'] as $code => $language)
+                                @if ($code !== app()->getLocale())
+                                    <a href="{{ route('admin.setLocale', $code) }}"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-100">
+                                        {{ $language }}
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
                     <div class="relative inline-block ">
                         <!-- Logout button -->
                         <form method="POST" action="{{ route('admin.logout') }}">
@@ -51,6 +70,18 @@ $currentUrl = \Request::segment(2);
                             <a class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-lg {{ $currentUrl == 'user' ? 'bg-white shadow-md' : 'bg-gray-100' }}" href="{{ route('admin.user.index') }}">
                                 <i class="ri-team-line text-2xl"></i>
                                 <span class="mx-4 font-medium">Felhasználók</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-lg {{ $currentUrl == 'category' ? 'bg-white shadow-md' : 'bg-gray-100' }}" href="{{ route('admin.category.index') }}">
+                                <i class="ri-list-check-2 text-2xl"></i>
+                                <span class="mx-4 font-medium">Kategóriák</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-lg {{ $currentUrl == 'album' ? 'bg-white shadow-md' : 'bg-gray-100' }}" href="{{ route('admin.album.index') }}">
+                                <i class="ri-album-line text-2xl"></i>
+                                <span class="mx-4 font-medium">Albumok</span>
                             </a>
                         </li>
                     </ul>

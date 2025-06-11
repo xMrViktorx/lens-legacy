@@ -13,8 +13,11 @@
         <meta name="keywords" content="{{ $keywords ?? '' }}">
         <meta name="author" content="{{ $author ?? '' }}">
 
+        <title>LensLegacyPhotography</title>
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('build-frontend/css/app.css') }}">
+
 
         <!-- JS -->
         @vite(['resources/js/app.js'])

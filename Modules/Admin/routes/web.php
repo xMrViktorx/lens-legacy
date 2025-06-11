@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('admin')->group(function () {
+
+        Route::get('/set-locale/{locale}', function ($locale) {
+        if (!in_array($locale, ['en', 'hu', 'sr'])) {
+            abort(400);
+        }
+
+        session(['locale' => $locale]);
+
+        return redirect()->back();
+    })->name('admin.setLocale');
+
     Route::get('/', 'AdminController@index')->middleware('guest')->name('admin.index');
     Route::post('/login', 'AdminController@login')->middleware('guest')->name('admin.login');
     Route::post('/logout', 'AdminController@logout')->middleware('auth')->name('admin.logout');
@@ -33,5 +44,24 @@ Route::prefix('admin')->group(function () {
         Route::get('/reset/{token}', 'PasswordResetController@showResetForm')->name('password.reset');
         Route::post('/reset/{token}', 'PasswordResetController@reset')->name('password.reset.save');
         Route::post('/email', 'PasswordResetController@create')->name('password.email');
+    });
+
+    Route::prefix('category')->middleware('auth')->group(function () {
+        Route::get('/', 'CategoryController@index')->name('admin.category.index');
+        Route::get('/create', 'CategoryController@create')->name('admin.category.create');
+        Route::post('/store', 'CategoryController@store')->name('admin.category.store');
+        Route::get('/edit/{id}', 'CategoryController@edit')->name('admin.category.edit');
+        Route::put('/update/{id}', 'CategoryController@update')->name('admin.category.update');
+        Route::delete('/delete/{id}', 'CategoryController@destroy')->name('admin.category.delete');
+    });
+
+    Route::prefix('album')->middleware('auth')->group(function () {
+        Route::get('/', 'AlbumController@index')->name('admin.album.index');
+        Route::get('/create', 'AlbumController@create')->name('admin.album.create');
+        Route::post('/store', 'AlbumController@store')->name('admin.album.store');
+        Route::get('/edit/{id}', 'AlbumController@edit')->name('admin.album.edit');
+        Route::put('/update/{id}', 'AlbumController@update')->name('admin.album.update');
+        Route::delete('/delete/{id}', 'AlbumController@destroy')->name('admin.album.delete');
+        Route::delete('/image','AlbumController@removeImage')->name('admin.album.image.remove');
     });
 });

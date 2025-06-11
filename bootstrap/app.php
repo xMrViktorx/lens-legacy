@@ -15,6 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
             guests: '/admin',
             users: '/admin/dashboard'
         );
+
+        $middleware->web([
+            \Modules\Admin\App\Http\Middleware\SetLocale::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
