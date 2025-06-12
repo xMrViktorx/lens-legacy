@@ -1,110 +1,139 @@
 <template>
   <div>
-    <nav>
-      <div class="menu-btn">
-        <div class="mt-1 menu-btn-icon">
-          <div class="line line--1"></div>
-          <div class="line line--2"></div>
-          <div class="line line--3"></div>
-        </div>
+    <router-link :to="{ name: 'home' }" class="nav-icon-div">
+      <img src="/public/build-frontend/images/logo/logo_white.png" class="nav-icon">
+    </router-link>
 
-        <button @click="showLanguageSwitcher" class="flex justify-center items-center px-2 language-switcher">
-          <i class="ri-earth-line text-3xl"></i>
+    <nav :class="{ 'nav-open': isMenuOpen }">
+      <div class="menu-btn">
+        <div class="mt-1 menu-btn-icon p-1" @click="toggleMenu">
+          <div :class="['line', 'line--1', { 'line-cross': isMenuOpen }]"></div>
+          <div :class="['line', 'line--2', { 'line-fade-out': isMenuOpen }]"></div>
+          <div :class="['line', 'line--3', { 'line-cross': isMenuOpen }]"></div>
+        </div>
+        <button
+          @click.stop="toggleLanguageSwitcher"
+          class="flex justify-center items-center px-2 language-switcher"
+          :class="languageSwitcherClass"
+        >
+          <i class="ri-earth-line text-3xl text-white"></i>
         </button>
       </div>
 
-      <div class="nav-links">
-        <div class="flex flex-col lg:w-[520px] sm:w-[405px] w-full justify-center bg-white items-center h-full">
-          <a href="#" 
-            class="link" 
-            @mouseover="activeMenu = 'home'" 
-            @mouseleave="activeMenu = null">{{ $t('menu.home') }}</a>
-          <a href="#" 
-            class="link" 
-            @mouseover="activeMenu = 'event'" 
-            @mouseleave="activeMenu = null">{{ $t('menu.event') }}</a>
-          <a href="#" 
-            class="link" 
-            @mouseover="activeMenu = 'portrait'" 
-            @mouseleave="activeMenu = null">{{ $t('menu.portrait') }}</a>
-          <a href="#" 
-            class="link" 
-            @mouseover="activeMenu = 'birthday'" 
-            @mouseleave="activeMenu = null">{{ $t('menu.birthday') }}</a>
-          <span class="link cursor-pointer" @click="showLanguageSwitcher">{{ $t('language.name') }}</span>
+      <div class="nav-links" :class="{ 'fade-in': isMenuOpen }">
+        <div class="flex flex-col lg:w-[40%] sm:w-[405px] w-full justify-center open-menu-bg items-center h-full">
+          <router-link
+            v-for="(category, index) in categories"
+            :key="category.id"
+            :to="{ name: 'category', params: { slug: category.slug } }"
+            class="link"
+            @mouseover="activeMenu = category.id"
+            @mouseleave="activeMenu = null"
+            @click="closeMenu"
+          >
+            {{ category.name[currentLocale] }}
+          </router-link>
         </div>
         <div class="w-full h-full relative lg:block hidden">
-          <div 
-            v-for="(image, index) in menuImages" 
-            :key="index" 
-            :class="['menu-image', { 'hover-div-show': activeMenu === image.key }]" 
-            :style="{ zIndex: index + 1, backgroundImage: `url(${image.url})` }">
-          </div>
+          <div
+            v-for="(category, index) in categories"
+            :key="category.id"
+            :class="['menu-image', { 'hover-div-show': activeMenu === category.id }]"
+            :style="{ zIndex: index + 100, backgroundImage: `url(/storage/${category.image})` }"
+          ></div>
         </div>
       </div>
     </nav>
   </div>
-</template> 
+</template>
 
 <script>
+import Swal from "sweetalert2";
+export default {
+  data() {
+    return {
+      isMenuOpen: false,
+      showLanguageSwitcher: false,
+      currentLocale: this.$i18n.locale,
+      activeMenu: null,
+      categories: [],
+    };
+  },
 
-  import Swal from "sweetalert2";
-
-  export default {
-    data() {
-      return {
-        showMobileNav: false,
-        isMenuOpen: false,
-        currentLocale: this.$i18n.locale,
-        activeMenu: null,
-        menuImages: [
-          { key: 'home', url: '/build-frontend/images/categories/party.jpg' },
-          { key: 'event', url: '/build-frontend/images/categories/event.jpg' },
-          { key: 'portrait', url: '/build-frontend/images/categories/portrait.jpg' },
-          { key: 'birthday', url: '/build-frontend/images/categories/birthday.jpg' },
-        ],
-      };
+  computed: {
+    languageSwitcherClass() {
+      return this.isMenuOpen ? 'hide-switch' : 'show-switch';
     },
-    methods: {
-      toggleNav() {
-        this.showMobileNav = !this.showMobileNav;
-      },
+  },
 
-      toggleMenu() {
-        this.isMenuOpen = !this.isMenuOpen;
-      },
-
-      switchLanguage(locale) {
-        this.$i18n.locale = locale;
-        this.currentLocale = locale;
-      },
-
-      showLanguageSwitcher() {
-        Swal.fire({
-          showConfirmButton: false,
-          showCloseButton: true,
-          html: `
-            <div class="flex flex-col pb-5">
-              <span class="language-title-swall md:text-4xl text-3xl">${this.$t("showAlertButton")}</span><br>
-              <span class="py-3 text-2xl font-semibold text-black cursor-pointer ${this.currentLocale === 'en' ? 'bg-black text-white rounded-xl' : ''}" id="btn-en">${this.$t("language.english")}</span>
-              <span class="py-3 text-2xl font-semibold text-black cursor-pointer ${this.currentLocale === 'hu' ? 'bg-black text-white rounded-xl' : ''}" id="btn-hu">${this.$t("language.hungarian")}</span>
-              <span class="py-3 text-2xl font-semibold text-black cursor-pointer ${this.currentLocale === 'rs' ? 'bg-black text-white ' : ''}" id="btn-rs">${this.$t("language.serbian")}</span>
-            </div>
-          `,
-          focusConfirm: false,
-          didOpen: () => {
-            document.getElementById("btn-en").addEventListener("click", () => this.changeLanguage("en"));
-            document.getElementById("btn-hu").addEventListener("click", () => this.changeLanguage("hu"));
-            document.getElementById("btn-rs").addEventListener("click", () => this.changeLanguage("rs"));
-          },
-        });
-      },
-      
-      changeLanguage(locale) {
-        this.$i18n.locale = locale;
-        this.currentLocale = locale;
-        Swal.close();
-      },
+  watch: {
+    isMenuOpen(val) {
+      document.body.classList.toggle('no-scroll', val);
     },
-  };
+  },
+
+  async created() {
+    await axios.get('/api/categories')
+    .then(response => {
+      this.categories = response.data;
+    })
+    .catch(error => {
+      console.error('Failed to fetch categories:', error);
+    });
+  },
+
+  beforeDestroy() {
+    document.body.classList.remove('no-scroll');
+  },
+
+  methods: {
+    toggleMenu(event) {
+      // Prevent double toggling if menu is closed via router-link click
+      this.isMenuOpen = !this.isMenuOpen;
+      if (!this.isMenuOpen) this.showLanguageSwitcher = false;
+    },
+
+    closeMenu() {
+      this.isMenuOpen = false;
+      this.showLanguageSwitcher = true;
+    },
+
+    toggleLanguageSwitcher(event) {
+      event && event.stopPropagation();
+      this.showLanguageSwitcher = !this.showLanguageSwitcher;
+      if (this.showLanguageSwitcher) this.showLanguageDialog();
+    },
+
+    showLanguageDialog() {
+      Swal.fire({
+        showConfirmButton: false,
+        showCloseButton: true,
+        html: `
+          <div class="flex flex-col pb-5">
+            <span class="language-title-swall md:text-4xl text-3xl">${this.$t("showAlertButton")}</span><br>
+            <span class="py-3 text-2xl font-semibold text-black cursor-pointer ${this.currentLocale === 'en' ? 'bg-black text-white rounded-xl' : ''}" id="btn-en">${this.$t("language.english")}</span>
+            <span class="py-3 text-2xl font-semibold text-black cursor-pointer ${this.currentLocale === 'hu' ? 'bg-black text-white rounded-xl' : ''}" id="btn-hu">${this.$t("language.hungarian")}</span>
+            <span class="py-3 text-2xl font-semibold text-black cursor-pointer ${this.currentLocale === 'sr' ? 'bg-black text-white' : ''}" id="btn-rs">${this.$t("language.serbian")}</span>
+          </div>
+        `,
+        focusConfirm: false,
+        didOpen: () => {
+          document.getElementById("btn-en").addEventListener("click", () => this.changeLanguage("en"));
+          document.getElementById("btn-hu").addEventListener("click", () => this.changeLanguage("hu"));
+          document.getElementById("btn-rs").addEventListener("click", () => this.changeLanguage("sr"));
+        },
+        willClose: () => {
+          this.showLanguageSwitcher = false;
+        }
+      });
+    },
+
+    changeLanguage(locale) {
+      this.$i18n.locale = locale;
+      this.currentLocale = locale;
+      Swal.close();
+      this.showLanguageSwitcher = false;
+    },
+  },
+};
 </script>

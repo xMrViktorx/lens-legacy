@@ -14,6 +14,6 @@ use Modules\Frontend\App\Http\Controllers\FrontendController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('/', FrontendController::class)->names('frontend');
-});
+Route::get('/{any}', function () {
+    return view('frontend::layouts.master');
+})->where('any', '.*');

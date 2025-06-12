@@ -13,7 +13,7 @@ export default defineConfig({
         viteStaticCopy({
             targets: [
                 {
-                    src: 'Modules/Frontend/resources/assets/images/categories', // Copy categories folder
+                    src: 'Modules/Frontend/resources/assets/images/**/', // Copy images folder
                     dest: 'images', // Copy into public/build-frontend/images
                 }
             ]

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->json('name')->unique();
+            $table->json('name');
             $table->string('slug')->unique();
             $table->json('description')->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');

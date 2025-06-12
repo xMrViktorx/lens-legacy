@@ -3,8 +3,8 @@
     <!-- Navbar -->
     <Navbar />
 
-    <!-- Home Content -->
-    <Home />
+    <!-- Main content -->
+    <router-view />
 
     <!-- Footer -->
     <Footer />
@@ -12,15 +12,16 @@
 </template>
 
 <script>
+  import Swal from "sweetalert2";
+  import axios from "axios";
+
   import Navbar from "./Navbar.vue";
-  import Home from "./Home.vue";
   import Footer from "./Footer.vue";
 
   export default {
     name: "App",
     components: {
       Navbar,
-      Home,
       Footer,
     },
   };
