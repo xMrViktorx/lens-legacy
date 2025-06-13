@@ -27,4 +27,9 @@ class Category extends Model
     {
         //return CategoryFactory::new();
     }
+
+    public function albums()
+    {
+        return $this->hasMany('Modules\Admin\App\Models\Album');
+    }
 }

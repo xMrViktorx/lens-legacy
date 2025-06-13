@@ -19,6 +19,7 @@ Route::get('/categories', 'ApiController@getCategories')->name('get.categories')
 
 Route::get('/category/{slug}', 'ApiController@getCategory')->name('get.category');
 
+Route::get('/category/albums/{slug}', 'ApiController@getCategoryAlbums')->name('get.category.albums');
 
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
     Route::get('frontend', fn (Request $request) => $request->user())->name('frontend');

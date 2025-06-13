@@ -327,6 +327,13 @@
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+
+    @media (max-width: 1024px) {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 150px;
+    }
 }
 
 nav {
@@ -375,7 +382,7 @@ nav {
     transition: all 700ms ease;
     width: 150px;
     right: 0px;
-    box-shadow: -5px 0px 16px 10px rgba(255,255,255,0.75);
+    box-shadow: -2px 0px 14px 1px rgba(255,255,255,0.75);
     border-right: none;
 }
 
