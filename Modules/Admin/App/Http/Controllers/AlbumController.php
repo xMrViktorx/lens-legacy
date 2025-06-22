@@ -42,6 +42,7 @@ class AlbumController extends Controller
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'images.*' => 'image',
+            'cover_image' => 'image',
         ]);
 
         // Create an empty album
@@ -59,6 +60,12 @@ class AlbumController extends Controller
         $album->category_id = $validated['category_id'];
 
         $album->save();
+
+        if ($request->hasFile('cover_image')) {
+            $coverPath = $request->file('cover_image')->storeAs("albums/{$album->id}/cover_image", $request->file('cover_image')->getClientOriginalName(), 'public');
+            $album->cover_image = $coverPath;
+            $album->save();
+        }
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
@@ -97,12 +104,23 @@ class AlbumController extends Controller
             'description' => 'nullable',
             'category_id' => 'required|exists:categories,id',
             'images.*' => 'image',
+            'cover_image' => 'image',
         ]);
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
                 $filePath = $file->storeAs("albums/{$album->id}", $file->getClientOriginalName(), 'public');
             }
+        }
+
+        if ($request->hasFile('cover_image')) {
+            // Delete old cover image if exists
+            if ($album->cover_image && \Storage::disk('public')->exists($album->cover_image)) {
+                \Storage::disk('public')->delete($album->cover_image);
+            }
+
+            $coverPath = $request->file('cover_image')->storeAs("albums/{$album->id}/cover_image", $request->file('cover_image')->getClientOriginalName(), 'public');
+            $album->cover_image = $coverPath;
         }
 
         // Set only current locale's translation

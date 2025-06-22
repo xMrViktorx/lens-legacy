@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('name');
             $table->string('slug')->unique();
             $table->json('description')->nullable();
+            $table->string('cover_image')->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });

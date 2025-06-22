@@ -40,6 +40,18 @@
                 @enderror
             </div>
             <div class="mb-6">
+                <label for="cover_image" class="block mb-2 text-sm font-medium text-gray-900">Borító kép</label>
+                <input type="file" id="cover_image" name="cover_image" accept="image/*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="previewCoverImage(event)">
+                @error('cover_image')
+                    <div class="text-red-700">{{ $message }}</div>
+                @enderror
+                <div id="coverImagePreview" class="mt-4 flex flex-wrap gap-4">
+                    @if (old('cover_image'))
+                        <img src="{{ old('cover_image') }}" class="max-w-xs rounded-lg shadow-md" style="max-height: 150px;">
+                    @endif
+                </div>
+            </div>
+            <div class="mb-6">
                 <label for="images" class="block mb-2 text-sm font-medium text-gray-900">Képek feltöltése</label>
                 <input type="file" id="images" name="images[]" multiple accept="image/*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" onchange="previewImages(event)">
                 @error('images')
@@ -69,6 +81,24 @@
                     };
                     reader.readAsDataURL(file);
                 });
+            }
+        }
+
+        function previewCoverImage(event) {
+            const coverImagePreview = document.getElementById('coverImagePreview');
+            coverImagePreview.innerHTML = ''; // Clear previous previews
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('max-w-xs', 'rounded-lg', 'shadow-md');
+                    img.style.maxHeight = '150px';
+                    coverImagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
             }
         }
     </script>
