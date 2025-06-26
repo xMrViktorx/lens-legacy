@@ -64,4 +64,9 @@ Route::prefix('admin')->group(function () {
         Route::delete('/delete/{id}', 'AlbumController@destroy')->name('admin.album.delete');
         Route::delete('/image','AlbumController@removeImage')->name('admin.album.image.remove');
     });
+
+    Route::prefix('email')->middleware('auth')->group(function () {
+        Route::get('/', 'EmailController@index')->name('admin.email.index');
+        Route::delete('/delete/{id}', 'EmailController@destroy')->name('admin.email.delete');
+    });
 });

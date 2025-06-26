@@ -84,6 +84,12 @@ $currentUrl = \Request::segment(2);
                                 <span class="mx-4 font-medium">Albumok</span>
                             </a>
                         </li>
+                        <li>
+                            <a class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-lg {{ $currentUrl == 'email' ? 'bg-white shadow-md' : 'bg-gray-100' }}" href="{{ route('admin.email.index') }}">
+                                <i class="ri-mail-line text-2xl"></i>
+                                <span class="mx-4 font-medium">Emailek</span>
+                            </a>
+                        </li>
                     </ul>
                 </aside>
             </div>
