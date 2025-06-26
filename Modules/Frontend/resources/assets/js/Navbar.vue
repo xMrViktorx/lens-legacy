@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link :to="{ name: 'home' }" class="nav-icon-div">
-      <img src="/public/build-frontend/images/logo/logo_white.png" class="nav-icon">
+      <img src="/public/build-frontend/images/logo/logo_white.svg" class="nav-icon">
     </router-link>
 
     <nav :class="{ 'nav-open': isMenuOpen }">

@@ -4,8 +4,9 @@
     "scripts": {
         "copy-icons": "copyfiles -u 3 \"node_modules/remixicon/fonts/*\" public/build-frontend/css/",
         "copy-fonts": "copyfiles -u 5 \"Modules/Frontend/resources/assets/fonts/*\" public/build-frontend/fonts/",
+        "copy-images": "copyfiles -u 5 \"Modules/Frontend/resources/assets/images/**/*\" public/build-frontend/images/",
         "build": "vite build",
-        "dev": "npm run build && npm run copy-icons && npm run copy-fonts && concurrently  \"npx tailwindcss -i ./Modules/Frontend/resources/assets/sass/app.scss -o ./public/build-frontend/css/app.css --watch\" \"vite\""
+        "dev": "npm run copy-icons && npm run copy-fonts && npm run copy-images && concurrently \"npx tailwindcss -i ./Modules/Frontend/resources/assets/sass/app.scss -o ./public/build-frontend/css/app.css --watch\" \"vite\" && npm run build"
     },
     "devDependencies": {
         "axios": "^1.6.4",

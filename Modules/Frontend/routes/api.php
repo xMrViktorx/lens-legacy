@@ -24,6 +24,10 @@ Route::get('/category/albums/{slug}', 'ApiController@getCategoryAlbums')->name('
 
 Route::post('/contact', [EmailController::class, 'store']);
 
+Route::get('/album/{slug}', 'ApiController@getAlbum')->name('get.album');
+
+Route::get('/album/{slug}/images', 'ApiController@getAlbumImages')->name('get.album.images');
+
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
     Route::get('frontend', fn (Request $request) => $request->user())->name('frontend');
 });

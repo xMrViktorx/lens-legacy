@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../../Modules/Frontend/resources/assets/js/Home.vue';
 import Category from '../../Modules/Frontend/resources/assets/js/Category.vue';
 import Contact from '../../Modules/Frontend/resources/assets/js/Contact.vue';
+import Album from '../../Modules/Frontend/resources/assets/js/Album.vue';
 
 const routes = [
     {
@@ -16,11 +17,20 @@ const routes = [
     component: Category,
     props: true
   },
-
-    {
+  {
     path: '/contact',
     name: 'contact',
     component: Contact,
+  },
+  {
+    path: '/album/:slug',
+    name: 'album',
+    component: Album
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: Home,
     props: true
   },
 ];
