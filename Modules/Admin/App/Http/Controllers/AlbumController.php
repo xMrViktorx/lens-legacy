@@ -36,9 +36,17 @@ class AlbumController extends Controller
     {
         $locale = app()->getLocale();
 
+        if ($request['status']) {
+            $request['status'] = true;
+        } else {
+            $request['status'] = false;
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|unique:albums,name->' . $locale,
             'slug' => 'required|unique:albums,slug',
+            'status' => 'required|boolean',
+            'position' => 'required|integer',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'images.*' => 'image',
@@ -58,6 +66,8 @@ class AlbumController extends Controller
         // Non-translatable fields
         $album->slug = $validated['slug'];
         $album->category_id = $validated['category_id'];
+        $album->status = $request['status'];
+        $album->position = $validated['position'];
 
         $album->save();
 
@@ -98,9 +108,17 @@ class AlbumController extends Controller
 
         $locale = app()->getLocale();
 
+        if ($request['status']) {
+            $request['status'] = true;
+        } else {
+            $request['status'] = false;
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|unique:albums,name->' . $locale . ',' . $album->id,
             'slug' => 'required|unique:albums,slug,' . $album->id,
+            'status' => 'required|boolean',
+            'position' => 'required|integer',
             'description' => 'nullable',
             'category_id' => 'required|exists:categories,id',
             'images.*' => 'image',
@@ -129,6 +147,8 @@ class AlbumController extends Controller
 
         // Update non-translatable fields
         $album->slug = $validated['slug'];
+        $album->status = $request['status'];
+        $album->position = $validated['position'];
 
         $album->save();
 

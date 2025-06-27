@@ -14,6 +14,26 @@
       "portrait": "Portrék",
       "birthday": "Születésnapok"
     },
-    "showAlertButton": "Mutasd az üzenetet"
+    "showAlertButton": "Mutasd az üzenetet",
+    "we_capture_the_moments": "Megörökítjük a pillanatokat",
+    "we_capture_the_moments_description": "Professzionális fotózás és videózás minden alkalomra, hogy az emlékeid örökké éljenek.",
+    "lets_start_the_next_project": "Kezdjük el a következő projektet együtt",
+    "contact_us_and_let_discuss": "Vedd fel velünk a kapcsolatot, és beszéljük meg, hogyan tehetjük egyedivé az eseményedet.",
+    "getting_in_touch": "Kapcsolatfelvétel",
+    "portfolio": "Portfólió",
+    "browse_through_categories": "Böngéssz kategóriáink között, és tekintsd meg albumainkat – a képek magukért beszélnek.",
+    "view_albums": "Albumok megtekintése",
+    "about_us": "Rólunk",
+    "location": "Szabadka, Szerbia",
+    "all_rights_reserved": "Minden jog fenntartva.",
+    "send_message_and_we_will_get_back_to_you_soon": "Küldj üzenetet, és hamarosan felvesszük veled a kapcsolatot.",
+    "name": "Név",
+    "email": "E-mail",
+    "subject": "Tárgy",
+    "message": "Üzenet",
+    "send": "Küldés",
+    "message_sent_successfully": "Üzenet sikeresen elküldve!",
+    "error_sending_message": "Hiba történt az üzenet küldésekor. Kérjük, próbáld újra később.",
+    "phone": "Telefon"
   }
   

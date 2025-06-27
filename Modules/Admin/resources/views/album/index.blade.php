@@ -12,6 +12,12 @@
                         Név
                     </th>
                     <th scope="col" class="py-3 px-6">
+                        Státusz
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Pozíció
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Létrehozva
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -28,6 +34,11 @@
                         <td class="py-4 px-6">
                             {{ $album->name }}
                         </td>
+                        <td class="py-4 px-6">
+                            {{ $album->status }}
+                        </td>
+                        <td class="py-4 px-6">
+                            {{ $album->position }}
                         <td class="py-4 px-6">
                             {{ $album->created_at }}
                         </td>

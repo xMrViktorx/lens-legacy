@@ -14,23 +14,23 @@ class ApiController extends Controller
 {
     public function getCategories()
     {
-        $categories = Category::all();
+        $categories = Category::where('status', 1)->orderBy('position', 'asc')->get();
 
         return response()->json($categories);
     }
 
     public function getCategory($slug)
     {
-        $category = Category::where('slug', $slug)->get();
+        $category = Category::where('slug', $slug)->where('status', 1)->first();
 
         return response()->json($category);
     }
 
     public function getCategoryAlbums($slug)
     {
-        $category = Category::where('slug', $slug)->first();
+        $category = Category::where('slug', $slug)->where('status', 1)->first();
 
-        $albums = $category ? $category->albums : [];
+        $albums = $category ? $category->albums->orderBy('position', 'asc') : [];
 
         foreach ($albums as $album) {
             $albumPath = "public/albums/{$album->id}";
@@ -45,7 +45,7 @@ class ApiController extends Controller
 
     public function getAlbum($slug)
     {
-        $album = Album::where('slug', $slug)->first();
+        $album = Album::where('slug', $slug)->where('status', 1)->first();
 
         if (!$album) {
             return response()->json(['error' => 'Album not found'], 404);
@@ -62,7 +62,7 @@ class ApiController extends Controller
 
     public function getAlbumImages($slug)
     {
-        $album = Album::where('slug', $slug)->first();
+        $album = Album::where('slug', $slug)->where('status', 1)->first();
 
         if (!$album) {
             return response()->json(['error' => 'Album not found'], 404);

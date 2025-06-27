@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->json('name');
             $table->string('slug')->unique();
+            $table->integer('position')->default(0);
+            $table->boolean('status')->default(true);
             $table->json('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');

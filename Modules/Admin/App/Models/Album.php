@@ -17,6 +17,8 @@ class Album extends Model
     protected $fillable = [
         'name',
         'slug',
+        'status',
+        'position',
         'description',
         'category_id',
     ];

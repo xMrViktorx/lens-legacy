@@ -17,17 +17,17 @@
           <div class="hero-text-accent absolute -bottom-10 -right-10 w-40 h-40 bg-white/5 blur-3xl rounded-full"></div>
           
           <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4 relative">
-            Megörökítjük a pillanatokat
+            {{ $t('we_capture_the_moments') }}
           </h1>
           <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl relative">
-            Professzionális fotózás minden alkalomra, hogy az emlékeid örökké éljenek.
+            {{ $t('we_capture_the_moments_description') }}
           </p>
           <div class="flex flex-wrap gap-4 relative">
             <a href="#categories" class="hero-button-primary px-8 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              Kategóriák
+              {{ $t('getting_in_touch') }}
             </a>
             <a href="#portfolio" class="hero-button-secondary px-8 py-3 bg-transparent border border-white/80 text-white font-medium rounded-full hover:bg-white/10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              Portfólió
+              {{ $t('portfolio') }}
             </a>
           </div>
         </div>
@@ -46,8 +46,8 @@
     <section id="categories" class="py-20 bg-black">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Kategóriák</h2>
-          <p class="text-gray-400 max-w-2xl mx-auto">Válassz a különböző fotózási kategóriák közül, mindegyikben professzionális minőséget nyújtunk.</p>
+          <h2 class="text-4xl font-bold mb-4">{{ $t('portfolio') }}</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">{{ $t('browse_through_categories') }}</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -59,7 +59,7 @@
               <h3 class="text-2xl font-bold mb-2">{{ category.name }}</h3>
               <p class="text-gray-300 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{{ category.description }}</p>
               <a href="#" class="inline-flex items-center text-white font-medium group">
-                Galéria megtekintése
+                {{ $t('view_albums') }}
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -84,7 +84,7 @@
             </div>
           </div>
           <div class="lg:w-1/2">
-            <h2 class="text-4xl font-bold mb-6">Rólunk</h2>
+            <h2 class="text-4xl font-bold mb-6">{{ $t('about_us') }}</h2>
             <p class="text-gray-300 mb-6">
               Szenvedélyünk a fotózás, amely lehetővé teszi, hogy megörökítsük az élet legszebb és legkülönlegesebb pillanatait. Több mint 10 éve dolgozunk azon, hogy ügyfeleink számára maradandó emlékeket teremtsünk.
             </p>
@@ -119,12 +119,12 @@
     <!-- Contact CTA Section -->
     <section class="py-20 bg-white text-black">
       <div class="container mx-auto px-4 text-center">
-        <h2 class="text-4xl font-bold mb-6">Kezdjük el a következő projektet együtt</h2>
+        <h2 class="text-4xl font-bold mb-6">{{ $t('lets_start_the_next_project') }}</h2>
         <p class="text-xl max-w-2xl mx-auto mb-8 text-gray-700">
-          Vedd fel velünk a kapcsolatot, és beszéljük meg, hogyan tehetjük egyedivé a te fotózásodat.
+          {{ $t('contact_us_and_let_discuss') }}
         </p>
         <a href="#" class="inline-block px-8 py-4 bg-black text-white font-medium rounded-full hover:bg-gray-800 transition-colors">
-          Kapcsolatfelvétel
+          {{ $t('getting_in_touch') }}
         </a>
       </div>
     </section>

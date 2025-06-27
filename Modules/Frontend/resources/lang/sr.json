@@ -14,6 +14,26 @@
       "portrait": "Portreti",
       "birthday": "Rođendani"
     },
-    "showAlertButton": "Pokazi poruku"
+    "showAlertButton": "Pokazi poruku",
+    "we_capture_the_moments": "Snimamo trenutke",
+    "we_capture_the_moments_description": "Profesionalna fotografija i videografija za sve prilike, kako bi vaši trenuci živeli zauvek.",
+    "lets_start_the_next_project": "Krenimo zajedno u sledeći projekat",
+    "contact_us_and_let_discuss": "Kontaktirajte nas i razgovarajmo o tome kako možemo učiniti vaš događaj jedinstvenim.",
+    "getting_in_touch": "U kontaktu",
+    "portfolio": "Portfolijo",
+    "browse_through_categories": "Pregledajte naše kategorije i pogledajte naše albume - slike govore same za sebe.",
+    "view_albums": "Pogledajte albume",
+    "about_us": "O nama",
+    "location": "Subotica, Srbija",
+    "all_rights_reserved": "Sva prava zadržana.",
+    "send_message_and_we_will_get_back_to_you_soon": "Pošaljite poruku i uskoro ćemo vam se javiti.",
+    "name": "Ime",
+    "email": "Email",
+    "subject": "Tema",
+    "message": "Poruka",
+    "send": "Pošalji",
+    "message_sent_successfully": "Poruka uspešno poslata!",
+    "error_sending_message": "Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovo kasnije.",
+    "phone": "Telefon"
   }
   

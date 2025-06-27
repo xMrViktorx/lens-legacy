@@ -12,6 +12,12 @@
                         Név
                     </th>
                     <th scope="col" class="py-3 px-6">
+                        Státusz
+                    </th>
+                    <th scope="col" class="py-3 px-6">
+                        Pozíció
+                    </th>
+                    <th scope="col" class="py-3 px-6">
                         Létrehozva
                     </th>
                     <th scope="col" class="py-3 px-6">
@@ -27,6 +33,12 @@
                         </th>
                         <td class="py-4 px-6">
                             {{ $category->name }}
+                        </td>
+                        <td class="py-4 px-6">
+                            {{ $category->status }}
+                        </td>
+                        <td class="py-4 px-6">
+                            {{ $category->position }}
                         </td>
                         <td class="py-4 px-6">
                             {{ $category->created_at }}

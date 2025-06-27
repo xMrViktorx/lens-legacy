@@ -35,9 +35,17 @@ class CategoryController extends Controller
     {
         $locale = app()->getLocale();
 
+        if ($request['status']) {
+            $request['status'] = true;
+        } else {
+            $request['status'] = false;
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|unique:categories,name->' . $locale,
             'slug' => 'required|string|unique:categories,slug',
+            'status' => 'required|boolean',
+            'position' => 'required|integer',
             'description' => 'nullable|string',
             'image' => 'image',
         ]);
@@ -60,6 +68,8 @@ class CategoryController extends Controller
         // Non-translatable fields
         $category->slug = $validated['slug'];
         $category->image = $validated['image'] ?? null;
+        $category->status = $request['status'];
+        $category->position = $validated['position'];
 
         $category->save();
 
@@ -85,9 +95,17 @@ class CategoryController extends Controller
 
         $locale = app()->getLocale();
 
+        if ($request['status']) {
+            $request['status'] = true;
+        } else {
+            $request['status'] = false;
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|unique:categories,name->' . $locale . ',' . $category->id,
             'slug' => 'required|string|unique:categories,slug,' . $category->id,
+            'status' => 'required|boolean',
+            'position' => 'required|integer',
             'description' => 'nullable|string',
             'image' => 'image',
         ]);
@@ -104,6 +122,8 @@ class CategoryController extends Controller
 
         // Update non-translatable fields
         $category->slug = $validated['slug'];
+        $category->status = $request['status'];
+        $category->position = $validated['position'];
 
         $category->save();
 

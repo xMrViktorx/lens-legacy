@@ -20,6 +20,23 @@
                 @enderror
             </div>
             <div class="mb-6">
+                <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Státusz <span class="text-red-700">*</span></label>
+                <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <option value="1" {{ $category->status == 1 ? 'selected' : '' }}>Aktív</option>
+                    <option value="0" {{ $category->status == 0 ? 'selected' : '' }}>Inaktív</option>
+                </select>
+                @error('status')
+                    <div class="text-red-700">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-6">
+                <label for="position" class="block mb-2 text-sm font-medium text-gray-900">Pozíció <span class="text-red-700">*</span></label>
+                <input type="number" id="position" name="position" value="{{ $category->position }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                @error('position')
+                    <div class="text-red-700">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-6">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Kategória leírása <small>[{{ app()->getLocale() }}]</small></label>
                 <textarea id="description" name="description" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">{{ $category->description }}</textarea>
                 @error('description')
