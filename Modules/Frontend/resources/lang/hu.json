@@ -3,16 +3,16 @@
     "welcome_message": "Üdvözöljük a weboldalon!",
     "ok": "Rendben",
     "language": {
-      "english": "Angol",
-      "hungarian": "Magyar",
-      "serbian": "Szerb",
-      "name": "Nyelv"
+        "english": "Angol",
+        "hungarian": "Magyar",
+        "serbian": "Szerb",
+        "name": "Nyelv"
     },
     "menu": {
-      "home": "Főoldal",
-      "event": "Események",
-      "portrait": "Portrék",
-      "birthday": "Születésnapok"
+        "home": "Főoldal",
+        "event": "Események",
+        "portrait": "Portrék",
+        "birthday": "Születésnapok"
     },
     "showAlertButton": "Mutasd az üzenetet",
     "we_capture_the_moments": "Megörökítjük a pillanatokat",
@@ -34,6 +34,21 @@
     "send": "Küldés",
     "message_sent_successfully": "Üzenet sikeresen elküldve!",
     "error_sending_message": "Hiba történt az üzenet küldésekor. Kérjük, próbáld újra később.",
-    "phone": "Telefon"
-  }
-  
+    "phone": "Telefon",
+    "videography": "Videóprodukcióink",
+    "videography_description": "Professzionális videóink megörökítik az események hangulatát és történetét.",
+    "wedding_films": "Esküvői filmek",
+    "wedding_films_description": "Művészi megközelítésű esküvői filmek, amelyek megőrzik a nagy nap legszebb pillanatait.",
+    "corporate_videos": "Céges videók",
+    "corporate_videos_description": "Professzionális vállalati videók, amelyek bemutatják cége értékeit és szolgáltatásait.",
+    "event_documentation": "Eseménydokumentáció",
+    "event_documentation_description": "Események teljes körű videós dokumentálása a legmagasabb minőségben.",
+    "4k_filming": "4K felvételek",
+    "4k_filming_description": "Ultra HD felbontású felvételek a legnagyobb részletességért és képminőségért.",
+    "cinematic_editing": "Filmes vágás",
+    "cinematic_editing_description": "Professzionális utómunka, amely kiemeli a történetet és fokozza az élményt.",
+    "custom_soundtrack": "Egyedi zenei aláfestés",
+    "custom_soundtrack_description": "Személyre szabott zenei válogatás, amely tökéletesen illeszkedik a film hangulatához.",
+    "our_videography_portfolio": "Videó portfóliónk",
+    "all_videos": "Minden videó"
+}

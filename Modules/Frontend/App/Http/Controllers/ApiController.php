@@ -30,7 +30,8 @@ class ApiController extends Controller
     {
         $category = Category::where('slug', $slug)->where('status', 1)->first();
 
-        $albums = $category ? $category->albums->orderBy('position', 'asc') : [];
+        // Use sortBy instead of orderBy on collections
+        $albums = $category ? $category->albums->sortBy('position') : [];
 
         foreach ($albums as $album) {
             $albumPath = "public/albums/{$album->id}";
@@ -40,7 +41,8 @@ class ApiController extends Controller
             $album->imgCount = count($files);
         }
 
-        return response()->json($albums);
+        // Convert collection to array for proper JSON serialization
+        return response()->json($albums->values()->all());
     }
 
     public function getAlbum($slug)

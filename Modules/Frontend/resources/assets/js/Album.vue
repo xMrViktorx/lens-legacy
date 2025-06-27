@@ -2,14 +2,14 @@
   <div class="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
     <!-- Album Header -->
     <header class="relative h-64 md:h-80 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80 z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
       <img 
         v-if="album.cover_image" 
         :src="`/storage/${album.cover_image}`" 
         alt="Album cover" 
         class="absolute inset-0 w-full h-full object-cover object-center opacity-70"
       />
-      <div class="relative z-20 container mx-auto px-4 h-full flex flex-col justify-end pb-8">
+      <div class="relative container mx-auto px-4 h-full flex flex-col justify-end pb-8">
         <h1 class="text-3xl md:text-5xl font-bold mb-2">{{ getLocalizedContent(album.name) }}</h1>
         <p class="text-lg text-gray-300 max-w-3xl">{{ getLocalizedContent(album.description) }}</p>
         <div class="flex items-center mt-4 text-sm">
@@ -23,7 +23,7 @@
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
       <!-- Enlarged Image View -->
-      <div v-if="selectedImage" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+      <div v-if="selectedImage" class="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center">
         <button @click="closeFullscreen" class="absolute top-4 right-4 text-white/70 hover:text-white z-[60]">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

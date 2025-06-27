@@ -3,6 +3,7 @@ import Home from '../../Modules/Frontend/resources/assets/js/Home.vue';
 import Category from '../../Modules/Frontend/resources/assets/js/Category.vue';
 import Contact from '../../Modules/Frontend/resources/assets/js/Contact.vue';
 import Album from '../../Modules/Frontend/resources/assets/js/Album.vue';
+import Video from '../../Modules/Frontend/resources/assets/js/Video.vue';
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
     path: '/album/:slug',
     name: 'album',
     component: Album
+  },
+  {
+    path: '/videography',
+    name: 'video',
+    component: Video
   },
   {
     path: '/',

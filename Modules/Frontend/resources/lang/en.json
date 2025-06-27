@@ -34,6 +34,22 @@
     "send": "Send",
     "message_sent_successfully": "Message sent successfully!",
     "error_sending_message": "An error occurred while sending the message. Please try again later.",
-    "phone": "Phone"
+    "phone": "Phone",
+    "videography": "Our Video Productions",
+    "videography_description": "Our professional videos capture the atmosphere and story of events.",
+    "wedding_films": "Wedding Films",
+    "wedding_films_description": "Artistically approached wedding films that preserve the most beautiful moments of the big day.",
+    "corporate_videos": "Corporate Videos",
+    "corporate_videos_description": "Professional business videos that showcase your company's values and services.",
+    "event_documentation": "Event Documentation",
+    "event_documentation_description": "Complete video documentation of events at the highest quality.",
+    "4k_filming": "4K Filming",
+    "4k_filming_description": "Ultra HD resolution footage for maximum detail and image quality.",
+    "cinematic_editing": "Cinematic Editing",
+    "cinematic_editing_description": "Professional post-production that highlights the story and enhances the experience.",
+    "custom_soundtrack": "Custom Soundtrack",
+    "custom_soundtrack_description": "Personalized music selection that perfectly matches the mood of the film.",
+    "our_videography_portfolio": "Our Video Portfolio",
+    "all_videos": "All Videos"
   }
   

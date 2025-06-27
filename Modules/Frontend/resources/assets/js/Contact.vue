@@ -16,7 +16,7 @@
         <div class="absolute bottom-0 right-0 w-64 h-64 bg-black/5 rounded-full translate-x-1/4 translate-y-1/4 blur-2xl"></div>
         
         <!-- Form Content -->
-        <form @submit.prevent="submitForm" class="relative p-8 md:p-10 z-10">
+        <form @submit.prevent="submitForm" class="relative p-8 md:p-10">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <!-- Modern floating label input for Name -->
             <div class="form-group relative">
@@ -130,7 +130,7 @@
       </div>
       
       <!-- Contact Info -->
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
         <div class="contact-info-item">
           <div class="bg-white/5 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

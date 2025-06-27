@@ -34,6 +34,22 @@
     "send": "Pošalji",
     "message_sent_successfully": "Poruka uspešno poslata!",
     "error_sending_message": "Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovo kasnije.",
-    "phone": "Telefon"
+    "phone": "Telefon",
+    "videography": "Naše video produkcije",
+    "videography_description": "Naši profesionalni video zapisi beleže atmosferu i priču događaja.",
+    "wedding_films": "Svadbeni filmovi",
+    "wedding_films_description": "Umetnički pristupljeni svadbeni filmovi koji čuvaju najlepše trenutke velikog dana.",
+    "corporate_videos": "Korporativni video zapisi",
+    "corporate_videos_description": "Profesionalni poslovni video zapisi koji predstavljaju vrednosti i usluge vaše kompanije.",
+    "event_documentation": "Dokumentacija događaja",
+    "event_documentation_description": "Kompletna video dokumentacija događaja u najvišem kvalitetu.",
+    "4k_filming": "4K snimanje",
+    "4k_filming_description": "Snimci u ultra HD rezoluciji za najveću detaljnost i kvalitet slike.",
+    "cinematic_editing": "Filmska montaža",
+    "cinematic_editing_description": "Profesionalna postprodukcija koja ističe priču i pojačava doživljaj.",
+    "custom_soundtrack": "Jedinstvena muzička podloga",
+    "custom_soundtrack_description": "Prilagođeni muzički izbor koji savršeno odgovara atmosferi filma.",
+    "our_videography_portfolio": "Naš video portfolio",
+    "all_videos": "Svi video zapisi"
   }
   
