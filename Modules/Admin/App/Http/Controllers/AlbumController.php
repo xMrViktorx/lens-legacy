@@ -148,6 +148,7 @@ class AlbumController extends Controller
         // Update non-translatable fields
         $album->slug = $validated['slug'];
         $album->status = $request['status'];
+        $album->category_id = $validated['category_id'];
         $album->position = $validated['position'];
 
         $album->save();
