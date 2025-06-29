@@ -4,6 +4,7 @@ import Category from '../../Modules/Frontend/resources/assets/js/Category.vue';
 import Contact from '../../Modules/Frontend/resources/assets/js/Contact.vue';
 import Album from '../../Modules/Frontend/resources/assets/js/Album.vue';
 import Video from '../../Modules/Frontend/resources/assets/js/Video.vue';
+import AllCategories from '../../Modules/Frontend/resources/assets/js/AllCategories.vue';
 
 const routes = [
     {
@@ -17,6 +18,11 @@ const routes = [
     name: 'category',
     component: Category,
     props: true
+  },
+  {
+    path: '/portfolio',
+    name: 'categories',
+    component: AllCategories
   },
   {
     path: '/contact',

@@ -336,7 +336,6 @@ export default {
     
     // Activate a video
     activateVideo(videoId) {
-      console.log(`Activating video ID: ${videoId}`);
       this.activeVideoId = videoId;
     },
     

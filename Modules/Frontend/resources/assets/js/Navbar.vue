@@ -33,6 +33,14 @@
           >
             {{ category.name[currentLocale] }}
           </router-link>
+          <router-link
+            :to="{ name: 'video' }" class="link">
+            {{ $t("videography") }}
+          </router-link>
+          <router-link
+            :to="{ name: 'contact' }" class="link">
+            {{ $t("getting_in_touch") }}
+          </router-link>
         </div>
         <div class="w-full h-full relative lg:block hidden">
           <div
