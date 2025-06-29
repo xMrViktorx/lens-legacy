@@ -5,28 +5,30 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
     plugins: [
-        vue(), // Vue.js plugin for Vite
+        vue(),
         laravel({
-            input: ["resources/css/app.css", "resources/js/app.js"], // Your main assets
-            refresh: true, // Live refresh during development
+            input: ["resources/css/app.css", "resources/js/app.js"],
+            refresh: true,
         }),
         viteStaticCopy({
             targets: [
                 {
-                    src: 'Modules/Frontend/resources/assets/images/**/', // Copy images folder
-                    dest: 'images', // Copy into public/build-frontend/images
+                    src: 'Modules/Frontend/resources/assets/images/**/',
+                    dest: 'images',
                 }
             ]
         })
     ],
     resolve: {
         alias: {
-            vue: "vue/dist/vue.esm-bundler.js", // Ensure proper Vue.js aliasing
+            vue: "vue/dist/vue.esm-bundler.js",
         },
     },
     build: {
-        outDir: "public/build-frontend", // Output directory for build
-        emptyOutDir: true,  // Empty the output directory before building
-        manifest: true,  // Create manifest for asset versioning
+        emptyOutDir: true,
+        manifest: "manifest.json",
+        rollupOptions: {
+            input: 'resources/js/app.js',
+        },
     },
 });
