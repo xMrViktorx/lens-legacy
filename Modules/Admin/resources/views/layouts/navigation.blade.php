@@ -10,7 +10,7 @@ $currentUrl = \Request::segment(2);
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
                     <button class="p-2 text-gray-600 rounded cursor-pointer lg:hidden" onclick="toogleNav()">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="https://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
@@ -44,7 +44,7 @@ $currentUrl = \Request::segment(2);
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
                             <button class="relative flex items-center p-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                                     <path fill="none" d="M0 0h24v24H0z" />
                                     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2a9.985 9.985 0 0 1 8 4h-2.71a8 8 0 1 0 .001 12h2.71A9.985 9.985 0 0 1 12 22zm7-6v-3h-8v-2h8V8l5 4-5 4z" />
                                 </svg>

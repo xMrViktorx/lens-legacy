@@ -65,7 +65,7 @@
                             >
                                 {{ $t("view_albums") }}
                                 <svg
-                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns="https://www.w3.org/2000/svg"
                                     class="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"

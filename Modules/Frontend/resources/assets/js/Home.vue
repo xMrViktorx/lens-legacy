@@ -20,12 +20,12 @@
                     class="hero-text-box max-w-3xl p-10 h-fit mb-28 rounded-2xl backdrop-blur-md bg-black/50 shadow-[0_10px_50px_rgba(0,0,0,0.5)]"
                 >
                     <h1
-                        class="text-5xl md:text-7xl font-bold leading-tight mb-4 relative"
+                        class="text-3xl md:text-7xl font-bold leading-tight mb-4 relative"
                     >
                         {{ $t("we_capture_the_moments") }}
                     </h1>
                     <p
-                        class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl relative"
+                        class="text-lg md:text-2xl text-gray-300 mb-8 max-w-2xl relative"
                     >
                         {{ $t("we_capture_the_moments_description") }}
                     </p>
@@ -56,7 +56,7 @@
                     class="w-3 h-3 rounded-full transition-all duration-300"
                     :class="
                         currentSlide === index
-                            ? 'bg-white w-8 shadow-lg'
+                            ? 'bg-white w-8'
                             : 'bg-white/50'
                     "
                 ></button>
@@ -121,7 +121,7 @@
                             >
                                 {{ $t("view_albums") }}
                                 <svg
-                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns="https://www.w3.org/2000/svg"
                                     class="h-5 w-5 ml-2 transform transition-transform group-hover:translate-x-1"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
@@ -145,7 +145,7 @@
                     >
                         {{ $t("view_portfolio") }}
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns="https://www.w3.org/2000/svg"
                             class="h-5 w-5 ml-2"
                             viewBox="0 0 20 20"
                             fill="currentColor"
@@ -201,7 +201,7 @@
                                     class="w-12 h-12 bg-black rounded-lg flex items-center justify-center flex-shrink-0"
                                 >
                                     <svg
-                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns="https://www.w3.org/2000/svg"
                                         class="h-6 w-6 text-white"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -231,7 +231,7 @@
                                     class="w-12 h-12 bg-black rounded-lg flex items-center justify-center flex-shrink-0"
                                 >
                                     <svg
-                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns="https://www.w3.org/2000/svg"
                                         class="h-6 w-6 text-white"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -261,7 +261,7 @@
                                     class="w-12 h-12 bg-black rounded-lg flex items-center justify-center flex-shrink-0"
                                 >
                                     <svg
-                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns="https://www.w3.org/2000/svg"
                                         class="h-6 w-6 text-white"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -293,7 +293,7 @@
                         >
                             {{ $t("our_videography_portfolio") }}
                             <svg
-                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns="https://www.w3.org/2000/svg"
                                 class="h-5 w-5 ml-2"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
@@ -340,7 +340,7 @@
                                         class="w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center"
                                     >
                                         <svg
-                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns="https://www.w3.org/2000/svg"
                                             class="h-8 w-8 md:h-10 md:w-10 text-white"
                                             viewBox="0 0 20 20"
                                             fill="currentColor"
@@ -360,7 +360,7 @@
                                     class="absolute inset-0 bg-gray-800 flex items-center justify-center"
                                 >
                                     <svg
-                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns="https://www.w3.org/2000/svg"
                                         class="h-16 w-16 text-gray-600"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -424,7 +424,7 @@
 
                         <!-- <a href="#" class="inline-flex items-center px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
           Ismerd meg csapatunkat
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="https://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
         </a> -->

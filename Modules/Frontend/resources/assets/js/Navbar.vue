@@ -34,20 +34,39 @@
             {{ category.name[currentLocale] }}
           </router-link>
           <router-link
-            :to="{ name: 'video' }" class="link">
+            :to="{ name: 'video' }"
+            class="link"
+            @mouseover="activeMenu = 'video'"
+            @mouseleave="activeMenu = null"
+            @click="closeMenu"
+          >
             {{ $t("videography") }}
           </router-link>
           <router-link
-            :to="{ name: 'contact' }" class="link">
+            :to="{ name: 'contact' }"
+            class="link"
+            @mouseover="activeMenu = 'contact'"
+            @mouseleave="activeMenu = null"
+            @click="closeMenu"
+          >
             {{ $t("getting_in_touch") }}
           </router-link>
         </div>
         <div class="w-full h-full relative lg:block hidden">
           <div
             v-for="(category, index) in categories"
-            :key="category.id"
+            :key="'catimg-' + category.id"
             :class="['menu-image', { 'hover-div-show': activeMenu === category.id }]"
             :style="{ zIndex: index + 100, backgroundImage: `url(/storage/${category.image})` }"
+          ></div>
+          <!-- Hardcoded images for videography and contact -->
+          <div
+            :class="['menu-image', { 'hover-div-show': activeMenu === 'video', 'fade-img': activeMenu === 'video' }]"
+            style="z-index: 110; background-image: url('/build-frontend/images/nav/video.jpg');"
+          ></div>
+          <div
+            :class="['menu-image', { 'hover-div-show': activeMenu === 'contact', 'fade-img': activeMenu === 'contact' }]"
+            style="z-index: 109; background-image: url('/build-frontend/images/nav/contact.jpg');"
           ></div>
         </div>
       </div>
@@ -145,3 +164,40 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.menu-image {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.menu-image.hover-div-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Fade effect for hardcoded nav items */
+.menu-image.fade-img {
+  transition: opacity 0.5s;
+  opacity: 0.5;
+}
+
+.menu-image.hover-div-show.fade-img {
+  opacity: 1;
+}
+
+/* For nav menu animation and no-scroll body */
+.nav-open {
+  /* Example, adjust as per your design */
+  overflow: visible;
+}
+.no-scroll {
+  overflow: hidden !important;
+}
+</style>
