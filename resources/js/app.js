@@ -8,6 +8,9 @@ import en from '../../Modules/Frontend/resources/lang/en.json';
 import hu from '../../Modules/Frontend/resources/lang/hu.json';
 import sr from '../../Modules/Frontend/resources/lang/sr.json';
 import App from "../../Modules/Frontend/resources/assets/js/App.vue";
+import lazyLoadPlugin from "../../Modules/Frontend/resources/assets/js/plugins/lazyLoad.js";
+import '../../Modules/Frontend/resources/assets/images/favicon/favicon.ico'
+import '../../Modules/Frontend/resources/assets/images/favicon/favicon.png'
 
 // Get saved locale from localStorage or use default
 const savedLocale = localStorage.getItem('user_locale') || 'sr';
@@ -29,6 +32,7 @@ const i18n = createI18n({
 const app = createApp(App);
 app.use(i18n);
 app.use(router);
+app.use(lazyLoadPlugin);
 
 // Set initial lang attribute
 document.querySelector('html').setAttribute('lang', savedLocale);

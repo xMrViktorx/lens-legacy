@@ -62,7 +62,7 @@ class ApiController extends Controller
         return response()->json($album);
     }
 
-    public function getAlbumImages($slug)
+    public function getAlbumImages($slug, Request $request)
     {
         $album = Album::where('slug', $slug)->where('status', 1)->first();
 
@@ -73,12 +73,31 @@ class ApiController extends Controller
         $albumPath = "public/albums/{$album->id}";
         $files = Storage::files($albumPath);
         
-        // Format the paths to be usable in frontend
-        $images = array_map(function($file) {
-            // Remove 'public/' from the path as Storage::url will add the appropriate path
-            return str_replace('public/', '', $file);
-        }, $files);
+        // Pagination parameters
+        $page = $request->input('page', 1);
+        $perPage = 30;
         
-        return response()->json($images);
+        // Calculate total pages
+        $totalImages = count($files);
+        $totalPages = ceil($totalImages / $perPage);
+        
+        // Get the subset of files for the current page
+        $offset = ($page - 1) * $perPage;
+        $paginatedFiles = array_slice($files, $offset, $perPage);
+        
+        // Format the paths
+        $images = array_map(function($file) {
+            return str_replace('public/', '', $file);
+        }, $paginatedFiles);
+        
+        return response()->json([
+            'images' => $images,
+            'pagination' => [
+                'current_page' => (int)$page,
+                'per_page' => $perPage,
+                'total_images' => $totalImages,
+                'total_pages' => $totalPages
+            ]
+        ]);
     }
 }

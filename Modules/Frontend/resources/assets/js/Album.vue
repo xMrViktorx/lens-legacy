@@ -40,8 +40,8 @@
         <!-- Navigation arrows -->
         <button @click="prevImage"
           class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-3 transition-all z-[60]"
-          :class="{ 'opacity-50 cursor-not-allowed': currentIndex === 0 || isTransitioning }"
-          :disabled="currentIndex === 0 || isTransitioning">
+          :class="{ 'opacity-50 cursor-not-allowed': currentImageIndex === 0 || isTransitioning }"
+          :disabled="currentImageIndex === 0 || isTransitioning">
           <svg xmlns="https://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -50,8 +50,8 @@
 
         <button @click="nextImage"
           class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 rounded-full p-3 transition-all z-[60]"
-          :class="{ 'opacity-50 cursor-not-allowed': currentIndex === images.length - 1 || isTransitioning }"
-          :disabled="currentIndex === images.length - 1 || isTransitioning">
+          :class="{ 'opacity-50 cursor-not-allowed': currentImageIndex === totalImages - 1 || isTransitioning }"
+          :disabled="currentImageIndex === totalImages - 1 || isTransitioning">
           <svg xmlns="https://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -61,7 +61,7 @@
         <!-- Image counter -->
         <div
           class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 px-4 py-2 rounded-full text-sm z-[60]">
-          {{ currentIndex + 1 }} / {{ images.length }}
+          {{ currentImageIndex + 1 }} / {{ totalImages }}
         </div>
 
         <!-- Image container with fixed dimensions -->
@@ -84,18 +84,54 @@
       </div>
 
       <!-- Thumbnail Grid -->
-      <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8">
-        <div v-for="(image, index) in images" :key="index" @click="selectImage(index)"
-          class="aspect-square overflow-hidden rounded-lg cursor-pointer relative group">
-          <img :src="image" :alt="`Photo ${index + 1}`"
-            class="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-            loading="lazy" />
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div v-else>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8">
+          <div v-for="(image, index) in images" :key="index" @click="selectImage(index)"
+            class="aspect-square overflow-hidden rounded-lg cursor-pointer relative group">
+            
+            <!-- Image container with proper stacking -->
+            <div class="relative w-full h-full">
+              <!-- Shimmer placeholder - will be hidden when image loads -->
+              <div v-if="!loadedImages[index]" class="absolute inset-0 bg-gray-800 shimmer-effect"></div>
+              
+              <!-- Actual image (hidden until loaded) -->
+              <img 
+                :src="image" 
+                :alt="`Photo ${index + 1}`"
+                @load="onImageLoaded(index)"
+                class="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-105"
+                :class="{'opacity-0': !loadedImages[index], 'opacity-100': loadedImages[index]}"
+              />
+              
+              <!-- Hover gradient overlay - always on top -->
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+            </div>
           </div>
-          <div
-            class="absolute bottom-2 left-2 text-sm font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        </div>
+
+        <!-- Pagination controls -->
+        <div class="flex justify-center items-center mt-10 mb-6">
+          <button @click="changePage(currentPage - 1)" 
+            class="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="currentPage <= 1 || isLoading">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <div class="px-6 py-2 text-white">
+            {{ currentPage }} / {{ totalPages }}
           </div>
+          
+          <button @click="changePage(currentPage + 1)" 
+            class="px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="currentPage >= totalPages || isLoading">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </main>
@@ -103,7 +139,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import axios from 'axios';
@@ -120,11 +156,24 @@ export default {
     const images = ref([]);
     const isLoading = ref(true);
     const selectedImage = ref(null);
-    const currentIndex = ref(0);
+    const currentImageIndex = ref(0);
     const isTransitioning = ref(false);
     const nextImageSrc = ref(null);
     const transitionDirection = ref(0); // -1: prev, 0: none, 1: next
     const imageIsLoaded = ref(false);
+    const loadedImages = reactive({});
+    
+    // Pagination
+    const currentPage = ref(1);
+    const totalPages = ref(1);
+    const totalImages = ref(0);
+    const imagesPerPage = ref(10);
+
+    // Track when an image has loaded
+    const onImageLoaded = (index) => {
+      // Mark this image as loaded, which will hide the shimmer
+      loadedImages[index] = true;
+    };
 
     // For back button - try to get the category slug from the album if available
     const goBackToCategory = () => {
@@ -143,8 +192,8 @@ export default {
         isLoading.value = true;
         const response = await axios.get(`/api/album/${route.params.slug}`);
         album.value = response.data;
-        // Now fetch images for this album
-        await fetchAlbumImages();
+        // Now fetch images for this album (first page)
+        await fetchAlbumImages(1);
       } catch (error) {
         console.error('Failed to fetch album:', error);
       } finally {
@@ -152,20 +201,54 @@ export default {
       }
     };
 
-    const fetchAlbumImages = async () => {
+    const fetchAlbumImages = async (page = 1) => {
       try {
-        // Note: You'll need to create this endpoint in your Laravel backend
-        const response = await axios.get(`/api/album/${route.params.slug}/images`);
-        images.value = response.data.map(image => `/storage/${image}`);
+        isLoading.value = true;
+        const response = await axios.get(`/api/album/${route.params.slug}/images`, {
+          params: { page }
+        });
+        
+        // Update images and pagination data
+        images.value = response.data.images.map(image => `/storage/${image}`);
+        
+        // Reset loaded images state
+        images.value.forEach((_, index) => {
+          loadedImages[index] = false;
+        });
+        
+        // Update pagination state
+        currentPage.value = response.data.pagination.current_page;
+        totalPages.value = response.data.pagination.total_pages;
+        totalImages.value = response.data.pagination.total_images;
+        
       } catch (error) {
         console.error('Failed to fetch album images:', error);
         images.value = [];
+      } finally {
+        isLoading.value = false;
       }
+    };
+
+    const changePage = async (page) => {
+      if (page < 1 || page > totalPages.value || isLoading.value) return;
+      
+      // Reset selected image when changing pages
+      if (selectedImage.value) {
+        closeFullscreen();
+      }
+      
+      await fetchAlbumImages(page);
+      
+      // Scroll to top of grid
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const selectImage = (index) => {
       if (isTransitioning.value) return;
-      currentIndex.value = index;
+      
+      // Calculate the actual index in the full album (across all pages)
+      const actualIndex = (currentPage.value - 1) * imagesPerPage.value + index;
+      currentImageIndex.value = actualIndex;
       selectedImage.value = images.value[index];
       document.addEventListener('keydown', handleKeydown);
     };
@@ -175,16 +258,46 @@ export default {
       document.removeEventListener('keydown', handleKeydown);
     };
 
-    const nextImage = () => {
-      if (isTransitioning.value || currentIndex.value >= images.value.length - 1) return;
+    const nextImage = async () => {
+      if (isTransitioning.value || currentImageIndex.value >= totalImages.value - 1) return;
+      
+      const nextIndex = currentImageIndex.value + 1;
+      const nextPageIndex = Math.floor(nextIndex / imagesPerPage.value) + 1;
+      
+      // If next image is on a different page, we need to fetch that page
+      if (nextPageIndex !== currentPage.value) {
+        await changePage(nextPageIndex);
+        // After page change, select the correct image on that page
+        const indexOnNewPage = nextIndex % imagesPerPage.value;
+        selectImage(indexOnNewPage);
+        return;
+      }
+      
+      // Normal case - next image is on current page
       transitionDirection.value = 1;
-      changeImage(currentIndex.value + 1);
+      const indexOnCurrentPage = nextIndex % imagesPerPage.value;
+      changeImage(indexOnCurrentPage);
     };
 
-    const prevImage = () => {
-      if (isTransitioning.value || currentIndex.value <= 0) return;
+    const prevImage = async () => {
+      if (isTransitioning.value || currentImageIndex.value <= 0) return;
+      
+      const prevIndex = currentImageIndex.value - 1;
+      const prevPageIndex = Math.floor(prevIndex / imagesPerPage.value) + 1;
+      
+      // If previous image is on a different page, we need to fetch that page
+      if (prevPageIndex !== currentPage.value) {
+        await changePage(prevPageIndex);
+        // After page change, select the correct image on that page
+        const indexOnNewPage = prevIndex % imagesPerPage.value;
+        selectImage(indexOnNewPage);
+        return;
+      }
+      
+      // Normal case - previous image is on current page
       transitionDirection.value = -1;
-      changeImage(currentIndex.value - 1);
+      const indexOnCurrentPage = prevIndex % imagesPerPage.value;
+      changeImage(indexOnCurrentPage);
     };
 
     const changeImage = async (newIndex) => {
@@ -199,10 +312,17 @@ export default {
     const nextImageLoaded = () => {
       imageIsLoaded.value = true;
       setTimeout(() => {
-        currentIndex.value = transitionDirection.value > 0
-          ? currentIndex.value + 1
-          : currentIndex.value - 1;
-        selectedImage.value = images.value[currentIndex.value];
+        // Update global index
+        if (transitionDirection.value > 0) {
+          currentImageIndex.value++;
+        } else {
+          currentImageIndex.value--;
+        }
+        
+        // Update local index for the current page
+        const localIndex = currentImageIndex.value % imagesPerPage.value;
+        selectedImage.value = images.value[localIndex];
+        
         isTransitioning.value = false;
         nextImageSrc.value = null;
         transitionDirection.value = 0;
@@ -246,6 +366,7 @@ export default {
 
     // Watch for route changes to reload data
     watch(() => route.params.slug, () => {
+      currentPage.value = 1;
       fetchAlbum();
     });
 
@@ -258,11 +379,15 @@ export default {
       images,
       isLoading,
       selectedImage,
-      currentIndex,
+      currentImageIndex,
       isTransitioning,
       nextImageSrc,
       transitionDirection,
       imageIsLoaded,
+      loadedImages,
+      currentPage,
+      totalPages,
+      totalImages,
       selectImage,
       closeFullscreen,
       nextImage,
@@ -271,7 +396,9 @@ export default {
       formatDate,
       imageLoaded,
       nextImageLoaded,
+      onImageLoaded,
       goBackToCategory,
+      changePage,
       t
     };
   }
@@ -281,15 +408,17 @@ export default {
 <style scoped>
 /* Smooth transitions for image changes */
 img {
-  will-change: opacity;
+  will-change: opacity, transform;
 }
 
 .opacity-0 {
   opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .opacity-100 {
   opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 img.max-h-full.max-w-full {
@@ -297,8 +426,23 @@ img.max-h-full.max-w-full {
   max-width: 85vw;
 }
 
-@media (max-width: 768px) {
+/* Shimmer effect for image placeholders */
+.shimmer-effect {
+  background: linear-gradient(to right, #333 0%, #444 20%, #333 40%, #333 100%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
 
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+@media (max-width: 768px) {
   /* Add custom swipe implementation if needed */
   .absolute.top-6.left-4 {
     top: 1rem;
@@ -330,7 +474,6 @@ button[aria-label="Back"]:hover,
 
 /* Fix for header button on mobile */
 @media (max-width: 640px) {
-
   .absolute.top-6.left-4,
   .absolute.top-6.left-8 {
     top: 0.5rem;
@@ -338,5 +481,25 @@ button[aria-label="Back"]:hover,
     padding: 0.25rem 0.7rem;
     font-size: 0.95rem;
   }
+}
+
+/* Pagination styles */
+.pagination-button {
+  min-width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-button:not(:disabled):hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 </style>
