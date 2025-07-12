@@ -23,8 +23,8 @@
         <title>LensLegacyPhotography</title>
 
         <!-- Favicon -->
-        <link rel="icon" href="/favicon.ico">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+        <link rel="icon" href="{{ asset('build-frontend/images/favicon/favicon.ico') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('build-frontend/images/favicon/favicon.png') }}">
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('build-frontend/css/app.css') }}">
